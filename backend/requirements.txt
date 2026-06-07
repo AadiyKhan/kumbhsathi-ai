@@ -1,4 +1,5 @@
-app.py
-gemini_service.py
-faq_service.py
-requirements.txt
+fastapi
+uvicorn
+google-generativeai
+python-dotenv
+rapidfuzz
