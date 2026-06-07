@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 from faq_service import find_faq_answer
@@ -30,23 +31,32 @@ def home():
 
 @app.post("/chat")
 def chat(query: Query):
+    try:
+        faq_answer = find_faq_answer(query.question)
 
-    faq_answer = find_faq_answer(query.question)
+        # FAQ found
+        if faq_answer:
+            return {
+                "source": "faq",
+                "answer": faq_answer
+            }
 
-    # FAQ found
-    if faq_answer:
+        # FAQ not found -> Gemini
+        ai_answer = get_ai_response(
+            query.question,
+            query.language
+        )
+
         return {
-            "source": "faq",
-            "answer": faq_answer
+            "source": "gemini",
+            "answer": ai_answer
         }
 
-    # FAQ not found -> Gemini
-    ai_answer = get_ai_response(
-    query.question,
-    query.language
-)
-
-    return {
-        "source": "gemini",
-        "answer": ai_answer
-    }
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "An internal server error occurred.",
+                "detail": str(e)
+            }
+        )
