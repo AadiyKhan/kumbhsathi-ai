@@ -73,7 +73,7 @@ useEffect(() => {
 
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/chat",
+      "https://kumbhsathi-ai-production.up.railway.app/chat",
       {
         question: userQuestion,
         language: language,
@@ -114,7 +114,7 @@ const askPresetQuestion = async (presetQuestion) => {
 
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/chat",
+      "https://kumbhsathi-ai-production.up.railway.app/chat",
       {
         question: presetQuestion,
         language: language,
