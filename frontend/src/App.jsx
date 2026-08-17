@@ -73,7 +73,7 @@ useEffect(() => {
 
   try {
     const response = await axios.post(
-      "https://kumbhsathi-ai-production.up.railway.app/chat",
+      `${import.meta.env.VITE_API_URL || "http://localhost:8000"}/chat`,
       {
         question: userQuestion,
         language: language,
@@ -114,7 +114,7 @@ const askPresetQuestion = async (presetQuestion) => {
 
   try {
     const response = await axios.post(
-      "https://kumbhsathi-ai-production.up.railway.app/chat",
+      `${import.meta.env.VITE_API_URL || "http://localhost:8000"}/chat`,
       {
         question: presetQuestion,
         language: language,
