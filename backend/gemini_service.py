@@ -11,7 +11,7 @@ if api_key is None:
 
 genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-3.5-flash-lite")
 
 
 def get_ai_response(question, language):
